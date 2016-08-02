@@ -17,15 +17,10 @@ class Profile: NSObject {
     
     func populate(profileInfo: Dictionary<String, AnyObject>) {
         
-        let props = ["_id","firstname","lastname","email","password"]
+        let props = ["_id","firstName","lastName","email","password"]
         for prop in props {
             let value = profileInfo[prop]
             self.setValue(value, forKey: prop)
         }
     }
-/*
-        if let _shares = startupInfo["shares"] as? Int {
-            self.shares = _shares
-        }
-*/
 }

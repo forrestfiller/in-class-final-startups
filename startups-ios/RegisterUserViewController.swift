@@ -24,8 +24,8 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
         var y = CGFloat(120)
         
         let fields = [
-            ["placeholder":"Firstname", "property":"firstnameTxtFld"],
-            ["placeholder":"Lastname", "property":"lastnameTxtFld"],
+            ["placeholder":"First Name", "property":"firstnameTxtFld"],
+            ["placeholder":"Last Name", "property":"lastnameTxtFld"],
             ["placeholder":"Email", "property":"emailTxtFld"],
             ["placeholder":"Password", "property":"passwordTxtFld"]
         ]
@@ -89,7 +89,8 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
         var profileProps = Dictionary<String, AnyObject>()
         for field in fields{
             let property = field.placeholder?.lowercaseString
-            profileProps[property!] = field.text!
+            let formattedProperty = property!.stringByReplacingOccurrencesOfString(" ", withString: "")
+            profileProps[formattedProperty] = field.text!
         }
         //print("createProfile: \(profileProps)")
         let url = "https://ff-startups.herokuapp.com/api/profile/"
@@ -109,54 +110,17 @@ class RegisterUserViewController: UIViewController, UITextFieldDelegate {
                         )
                     let notificationCtr = NSNotificationCenter.defaultCenter()
                     notificationCtr.postNotification(notification)
-                    let Vc = ViewController()
-                    self.presentViewController(Vc, animated: true, completion: nil)                    
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
         }
-        //self.dismissViewControllerAnimated(true, completion: nil)
+
     }
-    
-    
-    
-    /*
-
-     let startup = Startup()
-     startup.populate(result)
-     
-     let notification = NSNotification(
-     name: "StartupCreated",
-     object: nil,
-     userInfo:  nil
-     )
-     
-     let notificationCtr = NSNotificationCenter.defaultCenter()
-     notificationCtr.postNotification(notification)
-     
-     self.dismissViewControllerAnimated(true, completion: nil)
-     
-     }
-     }
-     }
-     }
-
- 
-    */
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
